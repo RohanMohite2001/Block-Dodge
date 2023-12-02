@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -10,12 +11,17 @@ public class GameManager : MonoBehaviour
     public float spawnRate;
     bool gameStarted = false;
 
+    public TextMeshProUGUI scoreText;
+    int score = 0;
+    public GameObject tapImage;
+
     private void Update()
     {
         if(Input.GetMouseButtonDown(0) && gameStarted == false)
         {
             StartSpawning();
             gameStarted = true;
+            tapImage.gameObject.SetActive(false);
         }
     }
 
@@ -29,5 +35,7 @@ public class GameManager : MonoBehaviour
         Vector2 spawnPos = spawnPoint.position;
         spawnPos.x = Random.Range(-maxPos, maxPos);
         Instantiate(blockPrefab, spawnPos, Quaternion.identity);
+        score++;
+        scoreText.text = score.ToString();
     }
 }
