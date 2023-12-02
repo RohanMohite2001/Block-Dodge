@@ -13,7 +13,15 @@ public class GameManager : MonoBehaviour
 
     public TextMeshProUGUI scoreText;
     int score = 0;
+
+    public TextMeshProUGUI highScoreText;
+    int highScore;
     public GameObject tapImage;
+
+    private void Start()
+    {
+        highScore = PlayerPrefs.GetInt("HighScore");
+    }
 
     private void Update()
     {
