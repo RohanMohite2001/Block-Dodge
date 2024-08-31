@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance;
+    public Player player;
     public Transform spawnPoint;
     public float maxPos;
     public GameObject blockPrefab;
@@ -20,6 +23,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        Instance = this;
         highScore = PlayerPrefs.GetInt("HighScore");
     }
 
@@ -45,5 +49,10 @@ public class GameManager : MonoBehaviour
         Instantiate(blockPrefab, spawnPos, Quaternion.identity);
         score++;
         scoreText.text = score.ToString();
+    }
+
+    public void GameOver()
+    {
+        SceneManager.LoadScene("Main Game");
     }
 }
